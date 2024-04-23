@@ -1,18 +1,28 @@
 import ThemeProvider from '@/contexts/theme/ThemeProvider';
 import type { PropsWithChildren } from 'react';
+import MarketStatus from '../MarketStatus';
 import Footer from './Footer';
 import Header from './Header';
+import SideBar from './SideBar';
 
-const Layout = ({ children }: PropsWithChildren) => {
+export default function Layout ({ children }: PropsWithChildren){
   return (
     <ThemeProvider>
       <div className='flex h-dvh flex-col bg-background text-foreground'>
         <Header />
-        <main className='mx-auto p-6 sm:p-8 h-full'>{children}</main>
+        <div className='flex'>
+          <main className='mx-auto h-full flex-1 p-6 sm:p-8'>{children}</main>
+          <SideBar>
+            <SideBar.Title>Market Status</SideBar.Title>
+            <SideBar.Content>
+              <MarketStatus />
+            </SideBar.Content>
+          </SideBar>
+        </div>
         <Footer />
       </div>
     </ThemeProvider>
   );
 };
 
-export default Layout;
+
