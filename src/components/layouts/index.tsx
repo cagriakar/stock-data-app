@@ -1,6 +1,6 @@
+import MarketStatusContainer from '@/containers/MarketStatusContainer';
 import ThemeProvider from '@/contexts/theme/ThemeProvider';
 import type { PropsWithChildren } from 'react';
-import MarketStatus from '../MarketStatus';
 import Footer from './Footer';
 import Header from './Header';
 import SideBar from './SideBar';
@@ -15,7 +15,7 @@ export default function Layout ({ children }: PropsWithChildren){
           <SideBar>
             <SideBar.Title>Market Status</SideBar.Title>
             <SideBar.Content>
-              <MarketStatus />
+              <MarketStatusContainer />
             </SideBar.Content>
           </SideBar>
         </div>

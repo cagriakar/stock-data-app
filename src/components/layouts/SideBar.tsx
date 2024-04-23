@@ -1,5 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import queryKeys from '@/constants/queryKeys';
+import useMarketStatus from '@/hooks/useMarketStatus';
+import { cn } from '@/lib/utils';
+import { useQueryClient } from '@tanstack/react-query';
+import { RefreshCw } from 'lucide-react';
 import { PropsWithChildren } from 'react';
+import { Button } from '../ui/button';
 
 export default function SideBar({ children }: PropsWithChildren) {
   return (
@@ -10,9 +16,22 @@ export default function SideBar({ children }: PropsWithChildren) {
 }
 
 function Title({ children }: PropsWithChildren) {
+  const queryClient = useQueryClient();
+  const { isFetching } = useMarketStatus();
+
   return (
     <CardHeader>
-      <CardTitle>{children}</CardTitle>
+      <CardTitle>
+        {children}
+        <Button
+          className='ml-2'
+          variant='ghost'
+          size='icon'
+          onClick={() => queryClient.invalidateQueries({ queryKey: [queryKeys.marketStatus] })}
+        >
+          <RefreshCw className={cn({ 'animate-spin': isFetching }, 'h-4 w-4')} />
+        </Button>
+      </CardTitle>
     </CardHeader>
   );
 }
