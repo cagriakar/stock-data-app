@@ -1,25 +1,55 @@
-export default function Home() {
+import StockDataCard from '@/components/StockDataCard';
+import Error from '@/components/fallback/Error';
+import LoadingContent from '@/components/fallback/LoadingContent';
+import SearchMe from '@/components/fallback/SearchMe';
+import { Input } from '@/components/ui/input';
+import useDebounce from '@/hooks/useDebounce';
+import useSearchTicker from '@/hooks/useSearchTicker';
+import type { Match } from '@/types';
+import { Search } from 'lucide-react';
+import { useState } from 'react';
+
+type Props = {
+  isLoading: boolean;
+  data: Match[] | undefined;
+  error: Error | null;
+};
+function Content({ isLoading, data, error }: Props) {
+  if (isLoading) return <LoadingContent large />;
+  if (error) return <Error message={error.message} />;
+
+  if (typeof data === 'undefined' || data.length === 0) return <SearchMe />;
+
   return (
-    <article className='prose prose-gray dark:prose-invert mx-auto max-w-3xl'>
-      <h1 className='text-4xl font-bold tracking-tight lg:text-5xl'>The Joke Tax Chronicles</h1>
-      <p className='text-gray-500 dark:text-gray-400'>Posted on August 24, 2023</p>
-      <p>
-        Once upon a time, in a far-off land, there was a very lazy king who spent all day lounging on his throne. One
-        day, his advisors came to him with a problem: the kingdom was running out of money.
-      </p>
-      <p>
-        The king thought long and hard, and finally came up with a brilliant plan: he would tax the jokes in the
-        kingdom.
-      </p>
-      <p>
-        Jokester began sneaking into the castle in the middle of the night and leaving jokes all over the place: under
-        the king's pillow, in his soup, even in the royal toilet. The king was furious, but he couldn't seem to stop
-        Jokester.
-      </p>
-      <p>
-        And then, one day, the people of the kingdom discovered that the jokes left by Jokester were so funny that they
-        couldn't help but laugh. And once they started laughing, they couldn't stop.
-      </p>
-    </article>
+    <ul className='space-y-4'>
+      {data.map((data) => (
+        <li key={data.name} className='rounded-lg bg-background p-4 shadow-md dark:bg-secondary'>
+          <StockDataCard data={data} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+export default function Home() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const filterTerm = useDebounce(searchTerm, 500);
+  const { data, isLoading, error } = useSearchTicker(filterTerm, { enabled: !!filterTerm });
+
+  return (
+    <div className='mx-auto max-w-3xl'>
+      <h1 className='text-3xl font-bold lg:text-4xl'>Stock Data App</h1>
+      <div className='p-4'>
+        <div className='relative'>
+          <Search className='absolute left-2 top-3 h-4 w-4 text-muted-foreground' />
+          <Input
+            placeholder='Search'
+            className='pl-8'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
+      <Content isLoading={isLoading} data={data} error={error} />
+    </div>
   );
 }

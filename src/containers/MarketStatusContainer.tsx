@@ -15,11 +15,11 @@ export default function MarketStatus() {
       </div>
     );
 
-  if (error) return <Error />;
+  if (error) return <Error message={error.message} />;
 
   return (
     <div className='space-y-4'>
-      {data.markets.map((marketInfo) => (
+      {data?.map((marketInfo) => (
         <MarketStatusInfo key={`${marketInfo.region}-${marketInfo.market_type}`} marketStatus={marketInfo} />
       ))}
     </div>

@@ -1,25 +1,52 @@
 import api from '@/api';
 import endpoints from '@/constants/endpoints';
-import { MarketStatus } from '@/types';
+import type { MarketStatus, RowMatch } from '@/types';
 
-type MarketStatusResponse = {
-  Information: string;
-  endpoint: string;
-  markets: MarketStatus[];
-};
+type MarketStatusResponse =
+  | {
+      Information: string;
+      endpoint: never;
+      markets: never;
+    }
+  | {
+      Information: never;
+      endpoint: string;
+      markets: MarketStatus[];
+    };
 
 async function getMarketStatus() {
   const res = await api.get<MarketStatusResponse>(endpoints.marketStatus);
-  console.log(`getMarketStatus , res:`, res);
+
   if (res.data?.Information) {
     // 25 requests per day
     throw Error(res.data.Information);
   }
-  return res.data;
+  return res.data.markets;
+}
+
+type SearchResponse =
+  | {
+      Information: string;
+      bestMatches: never;
+    }
+  | {
+      Information: never;
+      bestMatches: RowMatch[];
+    };
+
+async function searchTickerByName(tickerName: string) {
+  const res = await api.get<SearchResponse>(endpoints.searchTicker(tickerName));
+
+  if (res.data?.Information) {
+    // 25 requests per day
+    throw Error(res.data.Information);
+  }
+  return res.data.bestMatches;
 }
 
 export default {
-  getMarketStatus
+  getMarketStatus,
+  searchTickerByName
 };
 
 export { type MarketStatusResponse };

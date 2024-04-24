@@ -1,8 +1,8 @@
 import TickerInformation from '@/pages/TickerInformation';
-import React from 'react';
+import { lazy } from 'react';
 import type { PathRouteProps } from 'react-router-dom';
 
-const Home = React.lazy(() => import('@/pages/Home'));
+const Home = lazy(() => import('@/pages/Home'));
 
 export const routes: Array<PathRouteProps> = [
   {

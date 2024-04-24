@@ -1,5 +1,11 @@
-export default function Error() {
+type Props = {
+  message: string;
+};
+
+export default function Error({ message }: Props) {
   return (
-    <div>Error</div>
-  )
+    <div>
+      <p>{message}</p>
+    </div>
+  );
 }

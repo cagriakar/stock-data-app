@@ -5,7 +5,7 @@ import Footer from './Footer';
 import Header from './Header';
 import SideBar from './SideBar';
 
-export default function Layout ({ children }: PropsWithChildren){
+export default function Layout({ children }: PropsWithChildren) {
   return (
     <ThemeProvider>
       <div className='flex h-dvh flex-col bg-background text-foreground'>
@@ -23,6 +23,4 @@ export default function Layout ({ children }: PropsWithChildren){
       </div>
     </ThemeProvider>
   );
-};
-
-
+}

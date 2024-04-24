@@ -1,8 +1,11 @@
 {
   "extends": [
     "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
     "plugin:@typescript-eslint/recommended",
     "plugin:import/recommended",
+    "plugin:import/typescript",
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended"
   ],
@@ -10,6 +13,7 @@
     "react",
     "react-hooks",
     "react-refresh",
+    "import",
     "@typescript-eslint",
     "prettier"
   ],
@@ -23,21 +27,16 @@
     }
   },
   "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
     "import/resolver": {
       "typescript": {
         "alwaysTryTypes": true
       },
       "node": {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx"
-        ],
-        "moduleDirectory": [
-          "node_modules",
-          "src/"
-        ]
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "moduleDirectory": ["node_modules", "src/"]
       }
     }
   },
@@ -51,31 +50,6 @@
       }
     ],
     "no-console": "error",
-    "import/order": [
-      "warn",
-      {
-        "groups": [
-          [
-            "builtin",
-            "external"
-          ],
-          [
-            "internal",
-            "parent"
-          ],
-          [
-            "sibling",
-            "index"
-          ],
-          "object"
-        ],
-        "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
-      }
-    ],
     "react/jsx-props-no-spreading": "off",
     "react/require-default-props": "off",
     "react/function-component-definition": "off",

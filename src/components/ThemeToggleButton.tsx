@@ -2,8 +2,6 @@ import { useTheme } from '@/contexts/theme/ThemeProvider';
 import { Classic } from '@theme-toggles/react';
 import '@theme-toggles/react/css/Classic.css';
 
-
-
 export default function ThemeToggle() {
   const { toggleTheme, theme } = useTheme();
 

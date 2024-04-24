@@ -1,13 +1,17 @@
+import { cn } from '@/lib/utils';
 import { Skeleton } from '../ui/skeleton';
 
-export default function LoadingContent() {
+type Props = {
+  large?: boolean;
+};
+export default function LoadingContent({ large = false }: Props) {
   return (
     <div className='flex flex-col space-y-3'>
-      <Skeleton className='h-4 w-[100px]' />
+      <Skeleton className={cn('h-4', large ? 'w-[200px]' : 'w-[100px]')} />
       <div className='space-y-2'>
-        <Skeleton className='h-4 w-[250px]' />
-        <Skeleton className='h-4 w-[200px]' />
-        <Skeleton className='h-4 w-[200px]' />
+        <Skeleton className={cn('h-4', large ? 'w-[500px]' : 'w-[250px]')} />
+        <Skeleton className={cn('h-4', large ? 'w-[400px]' : 'w-[200px]')} />
+        <Skeleton className={cn('h-4', large ? 'w-[400px]' : 'w-[200px]')} />
       </div>
     </div>
   );

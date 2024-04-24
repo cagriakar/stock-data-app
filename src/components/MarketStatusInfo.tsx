@@ -1,5 +1,5 @@
 import StatusBadge from '@/components/StatusBadge';
-import { MarketStatus } from '@/types';
+import type { MarketStatus } from '@/types';
 
 type Props = {
   marketStatus: MarketStatus;

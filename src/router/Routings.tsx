@@ -4,8 +4,8 @@ import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { routes } from './routes';
 
-export default function Routings()  {
-	return (
+export default function Routings() {
+  return (
     <Suspense fallback={<LoadingPageContent />}>
       <Routes>
         {routes.map((routeProps) => (
@@ -15,5 +15,4 @@ export default function Routings()  {
       </Routes>
     </Suspense>
   );
-};
-
+}
