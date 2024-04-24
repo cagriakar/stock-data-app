@@ -1,4 +1,3 @@
-import TickerInformation from '@/pages/TickerInformation';
 import { lazy } from 'react';
 import type { PathRouteProps } from 'react-router-dom';
 
@@ -8,9 +7,5 @@ export const routes: Array<PathRouteProps> = [
   {
     path: '/',
     element: <Home />
-  },
-  {
-    path: 'ticker/:tickerName',
-    element: <TickerInformation />
   }
 ];
