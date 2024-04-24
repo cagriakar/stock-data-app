@@ -1,1 +1,1 @@
-export const API_KEY = import.meta.env.API_KEY;
+export const API_KEY = 'RIBXT3XYLI69PC0Q';
