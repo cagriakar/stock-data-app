@@ -1,13 +1,12 @@
-import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
+import { Badge, BadgeProps } from '@/components/ui/badge';
 
 type Props = {
   status: string;
 };
 export default function StatusBadge({ status }: Props) {
-  const color = status === 'open' ? 'green' : 'red';
+  const variant:BadgeProps['variant'] = status === 'open' ? 'default' : 'destructive';
   return (
-    <Badge className={cn('rounded-md,px-2 , py-1', `bg-${color}-500`, 'text-white')} variant='outline'>
+    <Badge className='rounded-md,px-2 , py-1' variant={variant}>
       {status.toLocaleUpperCase()}
     </Badge>
   );

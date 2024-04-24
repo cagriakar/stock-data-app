@@ -10,6 +10,7 @@ type MarketStatusResponse = {
 
 async function getMarketStatus() {
   const res = await api.get<MarketStatusResponse>(endpoints.marketStatus);
+  console.log(`getMarketStatus , res:`, res);
   if (res.data?.Information) {
     // 25 requests per day
     throw Error(res.data.Information);
@@ -20,3 +21,5 @@ async function getMarketStatus() {
 export default {
   getMarketStatus
 };
+
+export { type MarketStatusResponse };
